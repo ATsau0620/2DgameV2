@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: backgound
+    uniqueID: 1417430021
+    locked: 0
+  - name: people
+    uniqueID: 2606602025
+    locked: 0
