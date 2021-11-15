@@ -2108,6 +2108,7 @@ GameObject:
   - component: {fileID: 1828882300}
   - component: {fileID: 1828882302}
   - component: {fileID: 1828882301}
+  - component: {fileID: 1828882303}
   m_Layer: 0
   m_Name: RubyIdleDown1
   m_TagString: Untagged
@@ -2231,6 +2232,25 @@ CapsuleCollider2D:
   m_Offset: {x: -0.030015767, y: 0.5687127}
   m_Size: {x: 0.6052731, y: 1.168066}
   m_Direction: 0
+--- !u!95 &1828882303
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828882297}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ae8b510202c4b344f8ed2c918f941eba, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1874793142
 GameObject:
   m_ObjectHideFlags: 0
