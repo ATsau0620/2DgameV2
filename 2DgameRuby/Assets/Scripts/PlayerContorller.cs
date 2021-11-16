@@ -13,7 +13,9 @@ public class PlayerContorller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();    
+        rb = GetComponent<Rigidbody2D>();
+
+        rubyAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
