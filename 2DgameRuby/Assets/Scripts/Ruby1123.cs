@@ -21,6 +21,8 @@ public class Ruby1123 : MonoBehaviour
     //private int currentHelth;           //定義當前血量(不顯示)     
     public int currentHealth;             //定義當前血量(顯示在檢查器)
 
+    //【發射子彈 1 】
+    public GameObject projectilePrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -67,6 +69,12 @@ public class Ruby1123 : MonoBehaviour
             Application.LoadLevel("Week12_Health-2_damage");
 
         }
+
+    //【發射子彈 3/3】
+    if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Launch(); 
+        }
     }
     //【血量控制3/4】
     public void ChangeHealth(int amount)
@@ -76,6 +84,20 @@ public class Ruby1123 : MonoBehaviour
         print("Ruby 當前血量 :" + currentHealth);
     }
 
+    //【發射子彈 2/3】
+    private void Launch()
+    {
+
+    GameObject projectileObject = Instantiate(projectilePrefab,
+           rb.position, Quaternion.identity);
+
+
+    Bullet bullet = projectileObject.GetComponent<Bullet>();
+
+    bullet.Launch(lookDirection, 300);
+
+    rubyAnimator.SetTrigger("Launch");
+    }
 
 }  
 
