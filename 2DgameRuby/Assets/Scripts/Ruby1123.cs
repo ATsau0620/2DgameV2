@@ -13,11 +13,25 @@ public class Ruby1123 : MonoBehaviour
 
     public float speed = 3;
 
+    //【血量控制1/4】
+    [Header("最高血量")]
+    public int maxHealth = 5;
+
+    [Header("當前血量"), Range(0, 5)]      //在檢查器內的輔助顯示+可調動 
+    //private int currentHelth;           //定義當前血量(不顯示)     
+    public int currentHealth;             //定義當前血量(顯示在檢查器)
+
+
     // Start is called before the first frame update
     void Start()
     {
         rubyAnimator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>(); 
+        rb = GetComponent<Rigidbody2D>();
+
+        //【血量控制2/4】
+        currentHealth = maxHealth;
+        print("Ruby當前血量為:" + currentHealth);
+
     }
 
 
@@ -28,8 +42,8 @@ public class Ruby1123 : MonoBehaviour
    
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        print("Horizontal is: " + horizontal);
-        print("Vertical is: " + vertical);
+        //print("Horizontal is: " + horizontal);
+        //print("Vertical is: " + vertical);
 
         rubyMove = new Vector2(horizontal, vertical);
 
@@ -37,7 +51,8 @@ public class Ruby1123 : MonoBehaviour
         {
             lookDirection = rubyMove;
             lookDirection.Normalize();
-        }
+        
+       }
 
         rubyAnimator.SetFloat("Look X", lookDirection.x);
         rubyAnimator.SetFloat("Look Y", lookDirection.y);
@@ -45,6 +60,22 @@ public class Ruby1123 : MonoBehaviour
 
         rubyPosition = rubyPosition + speed * rubyMove * Time.deltaTime;
         rb.MovePosition(rubyPosition);
+    
+     //【血量控制4 / 4】
+        if (currentHealth == 0) 
+        {
+            Application.LoadLevel("Week12_Health-2_damage");
+
+        }
     }
+    //【血量控制3/4】
+    public void ChangeHealth(int amount)
+    {
+        currentHealth = currentHealth + amount;
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        print("Ruby 當前血量 :" + currentHealth);
+    }
+
+
 }  
 
