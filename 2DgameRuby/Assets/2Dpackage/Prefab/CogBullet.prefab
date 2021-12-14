@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDis: 0
-  hitEffect: {fileID: 0}
+  hitEffect: {fileID: 8499952772787809262, guid: e36b1a47907152544ba995bd42d379bf, type: 3}
 --- !u!50 &2351262682887201713
 Rigidbody2D:
   serializedVersion: 4

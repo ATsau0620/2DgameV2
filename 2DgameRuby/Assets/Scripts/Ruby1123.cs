@@ -24,6 +24,13 @@ public class Ruby1123 : MonoBehaviour
     //【發射子彈 1 】
     public GameObject projectilePrefab;
 
+    public AudioSource audioSource;
+
+    public AudioClip playerHit;
+
+    public AudioClip ThrowCog;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +41,8 @@ public class Ruby1123 : MonoBehaviour
         currentHealth = maxHealth;
         print("Ruby當前血量為:" + currentHealth);
 
+
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -41,7 +50,7 @@ public class Ruby1123 : MonoBehaviour
     {
 
         rubyPosition = transform.position;
-   
+
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         //print("Horizontal is: " + horizontal);
@@ -53,8 +62,8 @@ public class Ruby1123 : MonoBehaviour
         {
             lookDirection = rubyMove;
             lookDirection.Normalize();
-        
-       }
+
+        }
 
         rubyAnimator.SetFloat("Look X", lookDirection.x);
         rubyAnimator.SetFloat("Look Y", lookDirection.y);
@@ -62,18 +71,19 @@ public class Ruby1123 : MonoBehaviour
 
         rubyPosition = rubyPosition + speed * rubyMove * Time.deltaTime;
         rb.MovePosition(rubyPosition);
-    
-     //【血量控制4 / 4】
-        if (currentHealth == 0) 
+
+        //【血量控制4 / 4】
+        if (currentHealth == 0)
         {
             Application.LoadLevel("Week12_Health-2_damage");
 
         }
 
-    //【發射子彈 3/3】
-    if (Input.GetKeyDown(KeyCode.Space))
+        //【發射子彈 3/3】
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Launch(); 
+            Launch();
+            PlaySound(ThrowCog);
         }
     }
     //【血量控制3/4】
@@ -82,22 +92,32 @@ public class Ruby1123 : MonoBehaviour
         currentHealth = currentHealth + amount;
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         print("Ruby 當前血量 :" + currentHealth);
+
+        if (amount <0)
+        {
+            PlaySound(playerHit);
+        }
     }
 
     //【發射子彈 2/3】
     private void Launch()
     {
 
-    GameObject projectileObject = Instantiate(projectilePrefab,
-           rb.position, Quaternion.identity);
+        GameObject projectileObject = Instantiate(projectilePrefab,
+               rb.position, Quaternion.identity);
 
 
-    Bullet bullet = projectileObject.GetComponent<Bullet>();
+        Bullet bullet = projectileObject.GetComponent<Bullet>();
 
-    bullet.Launch(lookDirection, 300);
+        bullet.Launch(lookDirection, 300);
 
-    rubyAnimator.SetTrigger("Launch");
+        rubyAnimator.SetTrigger("Launch");
     }
 
+    
+    public void PlaySound(AudioClip audioClip)
+    {
+        audioSource.PlayOneShot(audioClip);
+    }
 }  
 
