@@ -24,7 +24,7 @@ public class Ruby1123 : MonoBehaviour
     //【發射子彈 1 】
     public GameObject projectilePrefab;
 
-    public AudioSource audioSource;
+   private AudioSource audioSource;
 
     public AudioClip playerHit;
 
@@ -89,14 +89,16 @@ public class Ruby1123 : MonoBehaviour
     //【血量控制3/4】
     public void ChangeHealth(int amount)
     {
+     if (amount <0)
+        {
+            PlaySound(playerHit);
+        }
+
         currentHealth = currentHealth + amount;
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         print("Ruby 當前血量 :" + currentHealth);
 
-        if (amount <0)
-        {
-            PlaySound(playerHit);
-        }
+       
     }
 
     //【發射子彈 2/3】
